@@ -1,21 +1,14 @@
 import { initializeLanguage } from './common/language'
 import { initializeCopyToClipboard } from './common/clipboard'
 import { initializeTablesorter } from './common/tablesorter'
-import { initializeGeographyTab } from './geography'
 import { initializeToc } from './common/toc'
 import { clearSearch, createSearchIndex } from './common/search'
 import { loadHtml } from '../util/loadHtml'
 
 export enum Tab {
   Chemistry = 'chemistry',
-  French = 'french',
-  General = 'general',
-  Geography = 'geography',
-  Germany = 'germany',
   Math = 'math',
   Physics = 'physics',
-  Sami = 'sami',
-  Spanish = 'spanish',
 }
 
 declare global {
@@ -34,6 +27,7 @@ const loadTab = (oldTab: Tab, newTab: Tab) => {
   // This timeout makes sure that the loading screen renders before executing the load tab code
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
   setTimeout(async () => {
+    console.log(oldTab, newTab)
     const oldTabElement = document.getElementById(`tab-${oldTab}`)
     oldTabElement.classList.remove('active')
     while (oldTabElement.firstChild) {
@@ -50,10 +44,6 @@ const loadTab = (oldTab: Tab, newTab: Tab) => {
     initializeCopyToClipboard()
     initializeTablesorter()
     createSearchIndex()
-
-    if (newTab === Tab.Geography) {
-      initializeGeographyTab()
-    }
 
     initializeToc()
 
@@ -79,5 +69,5 @@ export const initializeTabs = () => {
   const menuItems = Array.from(document.querySelectorAll('#tab-menu .tab-menu-option'))
   menuItems.forEach((element) => element.addEventListener('click', handleChangeTab))
 
-  loadTab(Tab.General, Tab.General)
+  loadTab(Tab.Math, Tab.Math)
 }
