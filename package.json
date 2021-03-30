@@ -7,7 +7,7 @@
   "scripts": {
     "start": "webpack serve",
     "build": "node index.js && DEPLOYMENT_ENV=koe webpack --mode production",
-    "build:internet": "node index.js && DEPLOYMENT_ENV=internet webpack --mode production && mkdir build/common/ && cp common/* build/common/",
+    "build:internet": "node index.js && DEPLOYMENT_ENV=internet webpack --mode production && mkdir build/common/ && cp -r common/* build/common/",
     "lint": "eslint . --ext .ts,.js",
     "test": "jest test/"
   },
